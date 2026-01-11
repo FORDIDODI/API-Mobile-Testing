@@ -15,48 +15,240 @@
         android:background="@color/primary"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/primary"
-            app:titleTextColor="@color/white"
-            app:navigationIcon="?attr/homeAsUpIndicator"
-            app:navigationIconTint="@color/white" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Header dengan back button -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="16dp">
+
+                <ImageView
+                    android:id="@+id/ivBack"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_back"
+                    android:contentDescription="Back"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Search"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="16dp" />
+
+            </LinearLayout>
+
+            <!-- Search Box Compact -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@color/searchBackground">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="16dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_search"
+                        app:tint="@color/textSecondary" />
+
+                    <EditText
+                        android:id="@+id/etSearch"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:hint="Search by title..."
+                        android:textColorHint="@color/textSecondary"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="14sp"
+                        android:paddingHorizontal="12dp"
+                        android:imeOptions="actionSearch"
+                        android:inputType="text"
+                        android:maxLines="1" />
+
+                    <ImageView
+                        android:id="@+id/ivClear"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_clear"
+                        android:visibility="gone"
+                        app:tint="@color/textSecondary" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:background="@drawable/bg_card"
-        app:iconifiedByDefault="false"
-        app:queryHint="Search movies..."
-        app:layout_constraintTop_toBottomOf="@id/appBarLayout" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvSearchResults"
+    <!-- Content Area -->
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:padding="16dp"
-        android:clipToPadding="false"
-        app:layout_constraintTop_toBottomOf="@id/searchView"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/appBarLayout"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-    <TextView
-        android:id="@+id/tvNoResults"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="No results found"
-        android:textSize="16sp"
-        android:textColor="@color/textSecondary"
-        android:visibility="gone"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Results Section -->
+            <LinearLayout
+                android:id="@+id/resultsSection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Results"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/textPrimary"
+                    android:padding="16dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvSearchResults"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false" />
+
+            </LinearLayout>
+
+            <!-- No Results -->
+            <TextView
+                android:id="@+id/tvNoResults"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No results found"
+                android:textSize="16sp"
+                android:textColor="@color/textSecondary"
+                android:visibility="gone"
+                android:layout_gravity="center"
+                android:layout_marginTop="100dp" />
+
+            <!-- Initial State -->
+            <LinearLayout
+                android:id="@+id/initialState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Popular Searches"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/textPrimary"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- Popular Search Items -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvPopular1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Action Movies"
+                        android:textSize="16sp"
+                        android:textColor="@color/textPrimary"
+                        android:padding="12dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:drawableStart="@drawable/ic_trending"
+                        android:drawablePadding="12dp"
+                        app:drawableTint="@color/textSecondary" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/divider"
+                        android:layout_marginHorizontal="12dp" />
+
+                    <TextView
+                        android:id="@+id/tvPopular2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Comedy"
+                        android:textSize="16sp"
+                        android:textColor="@color/textPrimary"
+                        android:padding="12dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:drawableStart="@drawable/ic_trending"
+                        android:drawablePadding="12dp"
+                        app:drawableTint="@color/textSecondary" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/divider"
+                        android:layout_marginHorizontal="12dp" />
+
+                    <TextView
+                        android:id="@+id/tvPopular3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Horror"
+                        android:textSize="16sp"
+                        android:textColor="@color/textPrimary"
+                        android:padding="12dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:drawableStart="@drawable/ic_trending"
+                        android:drawablePadding="12dp"
+                        app:drawableTint="@color/textSecondary" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/divider"
+                        android:layout_marginHorizontal="12dp" />
+
+                    <TextView
+                        android:id="@+id/tvPopular4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Sci-Fi"
+                        android:textSize="16sp"
+                        android:textColor="@color/textPrimary"
+                        android:padding="12dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:drawableStart="@drawable/ic_trending"
+                        android:drawablePadding="12dp"
+                        app:drawableTint="@color/textSecondary" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
     <ProgressBar
         android:id="@+id/progressBar"

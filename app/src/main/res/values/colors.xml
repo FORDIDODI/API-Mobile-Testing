@@ -16,4 +16,5 @@
     <color name="textSecondary">#B3B3B3</color>
 
     <color name="divider">#2C2C2E</color>
+    <color name="searchBackground">#2C2C2E</color>
 </resources>
