@@ -1,3 +1,25 @@
 <resources>
-    <string name="app_name">API-Mobile-Testing</string>
+    <string name="app_name">TMDB Movies</string>
+    <string name="search">Search</string>
+    <string name="popular">Popular</string>
+    <string name="now_playing">Now Playing</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="top_rated">Top Rated</string>
+    <string name="movie_details">Movie Details</string>
+    <string name="search_movies">Search Movies</string>
+    <string name="no_results">No results found</string>
+    <string name="error_loading">Error loading data</string>
+    <string name="cast">Cast</string>
+    <string name="reviews">Reviews</string>
+    <string name="no_reviews">No reviews available</string>
+    <string name="overview">Overview</string>
+    <string name="genres">Genres</string>
+    <string name="release_date">Release Date</string>
+    <string name="runtime">Runtime</string>
+    <string name="status">Status</string>
+    <string name="budget">Budget</string>
+    <string name="revenue">Revenue</string>
+    <string name="production_companies">Production Companies</string>
+    <string name="production_countries">Production Countries</string>
+    <string name="spoken_languages">Spoken Languages</string>
 </resources>
