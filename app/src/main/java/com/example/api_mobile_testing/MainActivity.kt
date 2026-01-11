@@ -25,7 +25,9 @@ import com.example.api_mobile_testing.adapter.MovieAdapter
 import com.example.api_mobile_testing.api.ApiConfig
 import com.example.api_mobile_testing.model.Movie
 import com.example.api_mobile_testing.ui.DetailActivity
+import com.example.api_mobile_testing.ui.ProfileActivity
 import com.example.api_mobile_testing.ui.SearchActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -35,13 +37,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var tvBannerTitle: TextView
     private lateinit var tvBannerRating: TextView
     private lateinit var tvBannerYear: TextView
-    private lateinit var ivSearch: ImageView
-    private lateinit var ivProfile: ImageView
     private lateinit var rvNowPlaying: RecyclerView
     private lateinit var rvUpcoming: RecyclerView
     private lateinit var rvTopRated: RecyclerView
     private lateinit var swipeRefresh: SwipeRefreshLayout
     private lateinit var progressBar: ProgressBar
+    private lateinit var bottomNav: BottomNavigationView
 
     private var popularMovies: List<Movie> = emptyList()
     private var currentBannerPosition = 0
@@ -64,24 +65,23 @@ class MainActivity : AppCompatActivity() {
         initViews()
         setupRecyclerViews()
         setupSwipeRefresh()
-        setupListeners()
+        setupBottomNav()
         loadMovies()
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0)
             insets
         }
     }
 
     private fun initViews() {
+        bottomNav = findViewById(R.id.bottomNav)
         viewPagerBanner = findViewById(R.id.viewPagerBanner)
         dotsIndicator = findViewById(R.id.dotsIndicator)
         tvBannerTitle = findViewById(R.id.tvBannerTitle)
         tvBannerRating = findViewById(R.id.tvBannerRating)
         tvBannerYear = findViewById(R.id.tvBannerYear)
-        ivSearch = findViewById(R.id.ivSearch)
-        ivProfile = findViewById(R.id.ivProfile)
         rvNowPlaying = findViewById(R.id.rvNowPlaying)
         rvUpcoming = findViewById(R.id.rvUpcoming)
         rvTopRated = findViewById(R.id.rvTopRated)
@@ -106,13 +106,22 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-    private fun setupListeners() {
-        ivSearch.setOnClickListener {
-            startActivity(Intent(this, SearchActivity::class.java))
-        }
+    private fun setupBottomNav() {
+        bottomNav.selectedItemId = R.id.nav_home
 
-        ivProfile.setOnClickListener {
-            Toast.makeText(this, "Profile feature coming soon", Toast.LENGTH_SHORT).show()
+        bottomNav.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> true
+                R.id.nav_search -> {
+                    startActivity(Intent(this, SearchActivity::class.java))
+                    true
+                }
+                R.id.nav_profile -> {
+                    startActivity(Intent(this, ProfileActivity::class.java))
+                    true
+                }
+                else -> false
+            }
         }
     }
 

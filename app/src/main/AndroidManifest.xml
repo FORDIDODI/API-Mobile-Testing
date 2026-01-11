@@ -39,6 +39,11 @@
             android:parentActivityName=".MainActivity"
             android:theme="@style/Theme.Api_mobile_testing" />
 
+        <activity
+            android:name=".ui.ProfileActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Api_mobile_testing" />
+
     </application>
 
 </manifest>
